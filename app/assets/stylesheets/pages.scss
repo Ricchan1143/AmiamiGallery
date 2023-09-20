@@ -1,0 +1,42 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.top-image{
+	margin-top: 0px;
+}
+
+.about-block{
+	display: flex;
+	justify-content: center;
+}
+
+.blog-block{
+	display: flex;
+	justify-content: center;
+}
+
+.item{
+	margin: 20px;
+	justify-content: center;
+}
+
+.item-block{
+	display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: wrap-reverse;
+}
+
+h2{
+	margin: 40px;
+	display: flex;
+	justify-content: center;
+}
+
+.about-sent{
+	margin: 20px;
+}
+
+.blog-sent{
+	margin: 20px;
+}

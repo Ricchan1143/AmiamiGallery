@@ -1,0 +1,50 @@
+<h3>アイテム詳細</h3>
+<div class="item-show">
+	<div><%= image_tag @item.image_url, size: "500x400" %></div>
+	<div>
+		<div><h3><%= @item.name %></h3></div>
+		<br>
+		<div>アイテム説明
+		<br><%= @item.about %></div>
+		<div>素材・質感：<%= @item.material %></div>
+		<br>
+		<div><small>投稿日：<%= @item.created_at %></small></div>
+		<br>
+		<% if user_signed_in? %>
+      		<% if current_user.already_liked?(@item) %>
+        		<%=button_to item_like_path(@item), method: :delete do %>
+					<i class="fas fa-heart"></i><%= @item.likes.count %>
+       		 	<% end %>
+      		<% else %>
+        		<%= button_to item_likes_path(@item), method: :post do %>
+					<i class="far fa-heart"></i><%= @item.likes.count %>
+        		<% end %>
+      		<% end %>
+    	<% else %>
+		<i class="far fa-heart"></i><%= @item.likes.count %>
+    	<% end %>
+	</div>
+</div>
+
+<div class="comment-wrapper">
+  <p>コメント</p>
+  <% @comments.each do |c| %>
+    <div>
+    <small><%= c.user.Nickname unless c.user.blank? %></small>
+    <br>
+    <%= c.content %>
+    </div>
+      <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_with(model: [@item, @comment], local: true) do |f| %>
+      <%= f.text_area :content %>
+      <%= button_tag type: "submit" do %>
+        <i class="far fa-comments"></i> コメントする
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<%= link_to "アイテム一覧に戻る", items_path %>

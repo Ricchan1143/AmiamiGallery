@@ -1,0 +1,26 @@
+<h2>アイテム一覧</h2>
+<%= link_to "新規投稿へ", new_item_path %>
+<div class="items-container">
+  <% @items.each do |t| %>
+    <div class="item">
+		<div><%= image_tag t.image_url, size: "250x200" %></div>
+    	<div><%= t.name %></div>
+		
+		<% if user_signed_in? %>
+			<% if current_user.already_liked?(t) %>
+				<%= button_to item_like_path(id: t.id, item_id: t.id), method: :delete do %>
+					<i class="fas fa-heart"></i><%= t.likes.count %>
+				<% end %>
+			<% else %>
+				<%= button_to item_likes_path(id: t.id, item_id: t.id), method: :post do %>
+					<i class="far fa-heart"></i><%= t.likes.count %>
+				<% end %>
+			<% end %>
+		<% else %>
+		<i class="fas fa-heart"></i><%= t.likes.count %>
+		<% end %>
+
+    	<div><%= link_to "詳細へ", item_path(t.id) %></div>
+ 	</div>
+  <% end %>
+</div>

@@ -1,0 +1,69 @@
+<html lang="ja">
+ <head>
+   <meta charset="UTF-8">
+   <title>あみあみ展示室</title>
+ </head>
+ <body>
+ <div>
+ </div>
+ AmiamiGallery
+  <br>
+  <br>
+  <br><br>
+
+  <div class="top-image">
+    <%= image_tag 'top_image.png', width: '80%', height: nil %></div>
+  </div>
+<br>
+<h2>Welcome To AmiamiGallery</h2>
+<br>
+<%= image_tag 'home_about_image.png', width: '40%', height: nil %></div>
+    <div class="about-sent">
+    <div>あみあみ展示室を開設した背景やコンセプトなどについて、お話します。お暇の際にちょこっとのぞいてみてはいかが？</div>
+    <br>
+    <small><%= link_to "のぞいてみる",pages_about_path %></small>
+  </div>
+<br>
+  <div class="blog-block">
+    <div class="blog-sent">
+    <div>みんなの日常を共有するスペースです。今日は何があったのか、みんなで交換日記してみませんか。</div>
+    <br>
+    <small><%= link_to "ぷち日記を見る", blogs_path %></small>
+    </div>
+    
+    <div class="blog-image"><%= image_tag 'home_blog_image.jpg', width: '40%', height: nil %></div></div>
+    
+  </div>
+<br>
+<br>
+  <h2>Recent items</h2>
+  <div class="item-block">
+  
+  <% @items.each do |t| %>
+    <div class="item">
+		<div><%= image_tag t.image_url, size: "250x200" %></div>
+    	<div><%= t.name %></div>
+		
+		<% if user_signed_in? %>
+			<% if current_user.already_liked?(t) %>
+				<%= button_to item_like_path(id: t.id, item_id: t.id), method: :delete do %>
+					<i class="fas fa-heart"></i><%= t.likes.count %>
+				<% end %>
+			<% else %>
+				<%= button_to item_likes_path(id: t.id, item_id: t.id), method: :post do %>
+					<i class="far fa-heart"></i><%= t.likes.count %>
+				<% end %>
+			<% end %>
+		<% else %>
+		<i class="fas fa-heart"></i><%= t.likes.count %>
+		<% end %>
+
+    	<div><%= link_to "View more", item_path(t.id) %></div>
+
+ 	</div>
+  <% end %>
+  </div>
+
+  <footer>	
+  </footer>
+</body>

@@ -1,0 +1,9 @@
+<h3><%= @blog.title %></h3>
+<div class="blog-show">
+	<div><%= image_tag @blog.image_url, size: "500x400" %></div>
+	<div>
+		<br>
+		<div>
+		<%= @blog.content %></div>
+		<br>
+		<div><small>投稿日：<%= @blog.created_at %></small></div>

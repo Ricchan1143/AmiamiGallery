@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AmiamiGallery</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/4329d3ea1d.js" crossorigin="anonymous"></script>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
+    
+  </head>
+
+  <body>
+    <header>
+      <div class="header">
+        <h1>AmiamiGallery</h1>
+      </div>
+      <div class="header-list">
+        <div><%= link_to "HOME", pages_path %></div>
+        <div><%= link_to "あみあみ展示室について",pages_about_path %></div>
+        <div><%= link_to "アイテム",items_path %></div>
+        <div><%= link_to "ぷち日記", blogs_path %></div>
+        <div>
+          <% if user_signed_in? %>
+            <%= link_to "マイページ", user_path(current_user.id) %>
+          <% else %>
+            <%= link_to "ログイン", new_user_session_path %>
+          <% end %>
+        </div>
+      </div>
+    </header>
+    <%= yield %>
+  </body>
+
+  <footer>
+    <div><%= video_tag 'logo_video.mp4', autoplay: :true, loop: :true, muted: :true %></div>
+    <div class="footer-list">
+      <div>
+        <% if user_signed_in? %>
+          <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
+        <% else %>
+          <%= link_to "ログイン", new_user_session_path %>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to "新規登録", new_user_registration_path %>
+      </div>
+      <br>
+      <div class="CR"><small>© 2023 AmiamiGallery</small>
+      </div>
+    </div>
+  </footer>
+</html>

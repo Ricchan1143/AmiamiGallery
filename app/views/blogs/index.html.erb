@@ -1,0 +1,13 @@
+<h2>ぷち日記</h2>
+<%= link_to "投稿する", new_blog_path %>
+<div class="blogs-container">
+  <% @blog.each do |t| %>
+    <div class="blog">
+		<p><%= image_tag t.image_url, size: "250x200" if t.image? %></p>
+		<p><%= t.title %></p>
+		<p><small><%= t.user.Nickname %></small></p>
+		<p><small><%= t.created_at %></small></p>
+	<div><%= link_to "Read more", blog_path(t.id) %></div>
+    </div>
+  <% end %>
+</div>
